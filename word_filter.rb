@@ -7,9 +7,6 @@ class WordFilter
     p string.include?(@filter_word) unless string.nil?
   end
 
-  def output
-    pp @filter_word
-  end
 end
 
 wf = WordFilter.new('test')
@@ -18,4 +15,3 @@ wf.detect('test')
 wf.detect('aaaatestaaaaaaa')
 wf.detect(' test ')
 wf.detect(nil)
-wf.output
