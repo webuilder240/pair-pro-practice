@@ -23,6 +23,9 @@ class WordFilter
   def censor(string)
     case
     when @filter_words.is_a?(Array)
+      @filter_words.inject(string) do |s, ng_word|
+        s.gsub(ng_word, '<censored>')
+      end
     when @filter_words.is_a?(String)
       string.gsub(@filter_words, '<censored>')
     else
@@ -48,3 +51,5 @@ p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 p wf.detect('t_wada: 昨日のvs Chelsea 熱かった!')
 p wf.detect('')
 p wf.detect('t_wada: 昨日のtest1vs test2 暑かった!')
+p '-------------------------'
+p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
