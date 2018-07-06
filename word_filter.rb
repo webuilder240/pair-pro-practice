@@ -7,11 +7,11 @@ class WordFilter
     p string.include?(@filter_word) unless string.nil?
   end
 
+  def censor(string)
+    string.gsub(@filter_word, '<censored>')
+  end  
 end
 
 wf = WordFilter.new('test')
-wf.detect('aaaaaaaa')
-wf.detect('test')
-wf.detect('aaaatestaaaaaaa')
-wf.detect(' test ')
-wf.detect(nil)
+p wf.censor('testaatatteesttesta')
+p wf.censor('')
