@@ -4,7 +4,7 @@ class WordFilter
   end
 
   def detect(string)
-    p string.include?(@filter_word) unless string.nil?
+    string.include?(@filter_word) unless string.nil?
   end
 
   def censor(string)
@@ -13,5 +13,5 @@ class WordFilter
 end
 
 wf = WordFilter.new('test')
+p wf.detect('testaa')
 p wf.censor('testaatatteesttesta')
-p wf.censor('')
