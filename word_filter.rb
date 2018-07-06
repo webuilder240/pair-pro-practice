@@ -19,7 +19,13 @@ class WordFilter
   end
 
   def censor(string)
-    string.gsub(@filter_word, '<censored>')
+    case
+    when @filter_words.is_a?(Array)
+    when @filter_words.is_a?(String)
+      string.gsub(@filter_words, '<censored>')
+    else
+      raise 'Type Error'
+    end
   end
 end
 
