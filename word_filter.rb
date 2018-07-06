@@ -8,8 +8,9 @@ class WordFilter
     # あとからNGワードを変更する。
   end
 
-  def detect(string)
+  def detect?(string)
     return false if string.nil?
+
     case
     when @filter_words.is_a?(Array)
       @filter_words.any? { |filter_word| string.include?(filter_word) }
@@ -35,7 +36,7 @@ class WordFilter
 end
 
 wf = WordFilter.new('Arsenal')
-p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+p wf.detect?('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 
 # wf = WordFilter.new('Arsenal, hoge')
@@ -44,12 +45,12 @@ p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 puts '========== Array ======================='
 # wf = WordFilter.new(['Arsenal', 'Chelsea'])
 wf = WordFilter.new(['Arsenal'])
-p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+p wf.detect?('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 
 wf = WordFilter.new(['Arsenal', 'Chelsea'])
-p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
-p wf.detect('t_wada: 昨日のvs Chelsea 熱かった!')
-p wf.detect('')
-p wf.detect('t_wada: 昨日のtest1vs test2 暑かった!')
+p wf.detect?('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+p wf.detect?('t_wada: 昨日のvs Chelsea 熱かった!')
+p wf.detect?('')
+p wf.detect?('t_wada: 昨日のtest1vs test2 暑かった!')
 p '-------------------------'
 p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
