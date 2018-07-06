@@ -9,10 +9,12 @@ class WordFilter
   end
 
   def detect(string)
+    return false if string.nil?
     case
     when @filter_words.is_a?(Array)
+      @filter_words.any? { |filter_word| string.include?(filter_word) }
     when @filter_words.is_a?(String)
-      string.include?(@filter_words) unless string.nil?
+      string.include?(@filter_words)
     else
       raise 'Type Error'
     end
@@ -36,7 +38,13 @@ p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
 # wf = WordFilter.new('Arsenal, hoge')
 # wf = WordFilter.new('Arsenal, hoge, fuga')
 # wf = WordFilter.new('Arsenal hoge fuga')
-# wf = WordFilter.new(['Arsenal'])
-#
-# p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
-# p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+puts '========== Array ======================='
+# wf = WordFilter.new(['Arsenal', 'Chelsea'])
+wf = WordFilter.new(['Arsenal'])
+p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+
+wf = WordFilter.new(['Arsenal', 'Chelsea'])
+p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+p wf.detect('t_wada: 昨日のvs Chelsea 熱かった!')
+p wf.detect('')
+p wf.detect('t_wada: 昨日のtest1vs test2 暑かった!')
