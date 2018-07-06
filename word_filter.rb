@@ -1,4 +1,6 @@
 class WordFilter
+  CENSORED_WORD = '<censored>'.freeze
+
   def initialize(filter_words)
     # NGWORDを複数にする。
     # wf = WordFilter.new('Arsenal')
@@ -25,10 +27,10 @@ class WordFilter
     case
     when @filter_words.is_a?(Array)
       @filter_words.inject(string) do |s, ng_word|
-        s.gsub(ng_word, '<censored>')
+        s.gsub(ng_word, CENSORED_WORD)
       end
     when @filter_words.is_a?(String)
-      string.gsub(@filter_words, '<censored>')
+      string.gsub(@filter_words, CENSORED_WORD)
     else
       raise 'Type Error'
     end
