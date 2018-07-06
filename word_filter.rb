@@ -9,9 +9,9 @@ class WordFilter
 
   def censor(string)
     string.gsub(@filter_word, '<censored>')
-  end  
+  end
 end
 
-wf = WordFilter.new('test')
-p wf.detect('testaa')
-p wf.censor('testaatatteesttesta')
+wf = WordFilter.new('Arsenal')
+p wf.detect('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
+p wf.censor('t_wada: 昨日のArsenal vs Chelsea 熱かった!')
